@@ -25,7 +25,7 @@ class RegisterView(APIView):
 
 
 
-        # def post(self, request):
+    #     def post(self, request):
     #     serializer = RegisterSerializer(data=request.data)
     #     if serializer.is_valid():
     #         serializer.save()
@@ -56,7 +56,7 @@ class LoginView(APIView):
 
 class Logout(APIView):
     permission_classes = [IsAuthenticated,]
-
+    authentication_classes = [JWTAuthentication,]
     def post(self, request):
         data = request.data
         refresh = RefreshToken(data['refresh'])
@@ -64,3 +64,5 @@ class Logout(APIView):
         return Response({
             'msg':'Tizimdan chiqdingiz'
         })
+
+
