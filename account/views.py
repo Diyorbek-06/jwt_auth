@@ -21,7 +21,7 @@ class RegisterView(APIView):
         password = data['password']
         user = User.objects.create_user(username=username, password=password)
         user.save()
-        return Response({"data": user.username, 'msg': "siz royxat otdingiz"})
+        return Response({"data": user.username, 'msg': "siz ro'yxat o'tdingiz"})
 
 
 
