@@ -10,6 +10,8 @@ from rest_framework import permissions
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.contrib.auth import authenticate
+import datetime
+
 # Create your views here.
 
 
@@ -46,12 +48,21 @@ class LoginView(APIView):
         password = data['password']
 
         user = authenticate(username=username, password=password)
-        refresh = RefreshToken.for_user(user)
 
-        return Response({
-            'refresh': str(refresh),
-            'access': str(refresh.access_token)
-        })
+        if user is not None:
+            refresh = RefreshToken.for_user(user)
+            return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token)
+            })
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+            with open("failed_logins.txt", "a") as f:
+                f.write(f"[{datetime.datetime.now()}]  Failed login: username='{username}', IP='{ip}'\n")
+
+            return Response({
+                'error': "Login yoki parol noto‘g‘ri"
+            }, status=401)
 
 
 class Logout(APIView):

@@ -1,0 +1,3 @@
+[2025-05-08 10:31:43.793964]  Failed login: username='use', IP='127.0.0.1'
+[2025-05-08 10:34:54.662214]  Failed login: username='use1', IP='127.0.0.1'
+[2025-05-08 10:35:40.174892]  Failed login: username='ibrohim', IP='127.0.0.1'
